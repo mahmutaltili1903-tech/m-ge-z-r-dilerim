@@ -23,6 +23,59 @@
             position: relative;
         }
 
+        /* --- YENİ EKLENEN KARŞILAMA EKRANI --- */
+        #entrance-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5f5 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease, visibility 1.5s;
+        }
+
+        #entrance-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .entrance-daisy {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            animation: pulseFlower 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseFlower {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        #enter-btn {
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            color: #d17a7a;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ffd15c;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 209, 92, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        #enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 209, 92, 0.6);
+        }
+        /* ------------------------------------- */
+
         /* Arka plandaki papatya ve kalp animasyonları */
         .bg-elements {
             position: absolute;
@@ -113,7 +166,6 @@
             overflow-y: auto;
         }
 
-        /* Yazının stili - Doğal ve samimi durması için */
         .letter-text {
             color: #554444;
             font-size: 1.05rem;
@@ -129,7 +181,6 @@
             font-style: italic;
         }
 
-        /* Kaydırma çubuğu özelleştirme */
         .letter-box::-webkit-scrollbar {
             width: 6px;
         }
@@ -145,6 +196,23 @@
 </head>
 <body>
 
+    <!-- KARŞILAMA EKRANI HTML'İ -->
+    <div id="entrance-screen">
+        <svg class="entrance-daisy" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="12" fill="#ffd15c"/>
+            <path d="M50,15 C45,25 40,35 50,38 C60,35 55,25 50,15 Z" fill="#fff"/>
+            <path d="M50,85 C45,75 40,65 50,62 C60,65 55,75 50,85 Z" fill="#fff"/>
+            <path d="M15,50 C25,45 35,40 38,50 C35,60 25,55 15,50 Z" fill="#fff"/>
+            <path d="M85,50 C75,45 65,40 62,50 C65,60 75,55 85,50 Z" fill="#fff"/>
+            <path d="M25,25 C32,32 40,40 42,42 C40,45 32,40 25,25 Z" fill="#fff"/>
+            <path d="M75,75 C68,68 60,60 58,58 C60,55 68,60 75,75 Z" fill="#fff"/>
+            <path d="M75,25 C68,32 60,40 58,42 C60,45 68,40 75,25 Z" fill="#fff"/>
+            <path d="M25,75 C32,68 40,60 42,58 C40,55 32,60 25,75 Z" fill="#fff"/>
+        </svg>
+        <button id="enter-btn">Müge, Papatyalar Evrenine Girmek İçin Tıkla...</button>
+    </div>
+
+    <!-- MEVCUT ARKA PLAN VE KART HTML'İ -->
     <div class="bg-elements">
         <svg class="daisy" style="left: 10%; animation-delay: 0s;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12" fill="#ffd15c"/><path d="M50,15 C45,25 40,35 50,38 C60,35 55,25 50,15 Z" fill="#fff"/><path d="M50,85 C45,75 40,65 50,62 C60,65 55,75 50,85 Z" fill="#fff"/><path d="M15,50 C25,45 35,40 38,50 C35,60 25,55 15,50 Z" fill="#fff"/><path d="M85,50 C75,45 65,40 62,50 C65,60 75,55 85,50 Z" fill="#fff"/><path d="M25,25 C32,32 40,40 42,42 C40,45 32,40 25,25 Z" fill="#fff"/><path d="M75,75 C68,68 60,60 58,58 C60,55 68,60 75,75 Z" fill="#fff"/><path d="M75,25 C68,32 60,40 58,42 C60,45 68,40 75,25 Z" fill="#fff"/><path d="M25,75 C32,68 40,60 42,58 C40,55 32,60 25,75 Z" fill="#fff"/></svg>
         <svg class="daisy" style="left: 30%; animation-delay: 3s; width:30px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12" fill="#ffd15c"/><path d="M50,15 C45,25 40,35 50,38 C60,35 55,25 50,15 Z" fill="#fff"/><path d="M50,85 C45,75 40,65 50,62 C60,65 55,75 50,85 Z" fill="#fff"/><path d="M15,50 C25,45 35,40 38,50 C35,60 25,55 15,50 Z" fill="#fff"/><path d="M85,50 C75,45 65,40 62,50 C65,60 75,55 85,50 Z" fill="#fff"/></svg>
@@ -185,5 +253,11 @@
         </div>
     </div>
 
+    <!-- BUTONA TIKLANDIĞINDA EKRANI SİLEN JAVASCRIPT KODU -->
+    <script>
+        document.getElementById('enter-btn').addEventListener('click', function() {
+            document.getElementById('entrance-screen').classList.add('hidden');
+        });
+    </script>
 </body>
 </html>
